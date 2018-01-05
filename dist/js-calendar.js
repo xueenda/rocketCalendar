@@ -57,6 +57,7 @@ var JSCalendarEvent = function () {
             this.at = data.at && new Date(data.at);
             this.duration = data.duration;
             this.displayname = data.displayname;
+            this.extra = data.extra;
             this.color = data.color;
             this.html = data.html;
         }
@@ -199,6 +200,7 @@ var JSCalendarEvent = function () {
     }, {
         key: "dragging",
         value: function dragging() {
+            console.trace(1);
             this.monthElem.classList.add('dragged');
             this.weekElem.classList.add('dragged');
             this.dayElem.classList.add('dragged');
@@ -217,37 +219,37 @@ var JSCalendarEvent = function () {
         value: function bindEvents() {
             var _this = this;
 
-            this.monthElem.addEventListener('mousedown', function () {
-                var finish = function finish() {
-                    window.removeEventListener('mouseup', finish);
-                    _this.dropped();
-                };
-                window.addEventListener('mouseup', finish);
+            // this.monthElem.addEventListener('mousedown', function () {
+            //     var finish = function finish() {
+            //         window.removeEventListener('mouseup', finish);
+            //         _this.dropped();
+            //     };
+            //     window.addEventListener('mouseup', finish);
 
-                _this.dragging();
-            });
+            //     _this.dragging();
+            // });
 
-            this.weekElem.addEventListener('mousedown', function () {
-                var finish = function finish() {
-                    window.removeEventListener('mouseup', finish);
-                    _this.dropped();
-                };
-                window.addEventListener('mouseup', finish);
+            // this.weekElem.addEventListener('mousedown', function () {
+            //     var finish = function finish() {
+            //         window.removeEventListener('mouseup', finish);
+            //         _this.dropped();
+            //     };
+            //     window.addEventListener('mouseup', finish);
 
-                _this.dragging();
-            });
+            //     _this.dragging();
+            // });
 
-            this.dayElem.addEventListener('mousedown', function (ev) {
-                var finish = function finish() {
-                    window.removeEventListener('mouseup', finish);
-                    _this.dropped();
-                };
-                window.addEventListener('mouseup', finish);
+            // this.dayElem.addEventListener('mousedown', function (ev) {
+            //     var finish = function finish() {
+            //         window.removeEventListener('mouseup', finish);
+            //         _this.dropped();
+            //     };
+            //     window.addEventListener('mouseup', finish);
 
-                _this.originalY = ev.y;
-                _this.potentialnewtop = _this.daytop;
-                _this.dragging();
-            });
+            //     _this.originalY = ev.y;
+            //     _this.potentialnewtop = _this.daytop;
+            //     _this.dragging();
+            // });
 
             this.monthElem.addEventListener('click', function () {
                 _this.calendar.fire("click", _this);
@@ -469,8 +471,14 @@ var JSCalendar = function () {
     }, {
         key: "on",
         value: function on(event, callback) {
-            this.hooks[event] = this.hooks[event] || [];
-            this.hooks[event].push(callback);
+            if(!Array.isArray(event))
+                event = [event];
+
+            var self = this;
+            event.forEach(function(e){
+                self.hooks[e] = self.hooks[e] || [];
+                self.hooks[e].push(callback);
+            });
 
             return this;
         }
@@ -974,6 +982,7 @@ var JSCalendar = function () {
     }, {
         key: "dragging",
         value: function dragging(ev) {
+            return false;
             this.fire('dragging', ev);
             this.state.dragging = true;
             this.state.dragged = ev;
