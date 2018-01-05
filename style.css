@@ -25,6 +25,7 @@
 
 
 
+
 /* Modal Content */
 
 .modal-content {
@@ -33,7 +34,9 @@
   padding: 20px;
   border: 1px solid #888;
   width: 500px;
+  /*max-height: 70vh;*/
 }
+
 
 
 
@@ -53,17 +56,15 @@
   cursor: pointer;
 }
 
-#event-description {
+.event-content {
   overflow: scroll;
   height: 100%;
-  max-height: 40vh;
+  max-height: 55vh;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 414px) {
   .modal-content {
     width: 80%;
-  }
-  #event-description {
-    max-height: 250px;
   }
 }
