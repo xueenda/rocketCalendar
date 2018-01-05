@@ -24,10 +24,10 @@ function _daysInMonth(year, month) {
 
 
 function _buildUrl(year, month) {
-  var date = new Date(year + "-" + (month + 1) + '-01');
+  var date = new Date(year + (month<9 ? "-0" : "-") + (month + 1) + '-01');
   var start = date.toISOString().substring(0, 10);
 
-  date = new Date(year + "-" + (month + 1) + '-' + _daysInMonth(year, month));
+  date = new Date(year + (month<9 ? "-0" : "-") + (month + 1) + '-' + _daysInMonth(year, month));
   var end = date.toISOString().substring(0, 10);
 
   return "https://launchlibrary.net/1.2/launch/" + start + "/" + end;
