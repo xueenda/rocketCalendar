@@ -63,4 +63,7 @@
   .modal-content {
     width: 80%;
   }
+  #event-description {
+    max-height: 250px;
+  }
 }
