@@ -84,7 +84,6 @@ function _fetchLaunchEvents(year, month) {
         });
       });
 
-      console.log(events);
       _renderEvents(year, month, events);
     }
   });

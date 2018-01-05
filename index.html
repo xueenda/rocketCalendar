@@ -10,8 +10,16 @@
   <meta name="robots" content="index,follow">
   <meta name="description" content="A regularly updated listing of planned orbital missions from spaceports around the globe">
   <title>Worldwide Rocket Launches Calendar</title>
-  <link href="./dist/js-calendar.css" type="text/css" rel="stylesheet" />
-  <link href="./style.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript">
+  var cache = 60; // Cache in second
+  var version = Math.floor(Date.now() / (1000 * cache));
+  [
+    './dist/js-calendar.css',
+    './style.css'
+  ].forEach(function(file) {
+    document.write("<link href='" + file + "?v=" + version + "' type='text/css' rel='stylesheet' />");
+  });
+  </script>
 </head>
 
 <body>
@@ -28,8 +36,14 @@
       <a id="add-to-calendar" href="#" target="_blank">Add to calendar</a>
     </div>
   </div>
-  <script src="./dist/js-calendar.js"></script>
-  <script src="./app.js"></script>
+  <script type="text/javascript">
+  [
+    './dist/js-calendar.js',
+    './app.js'
+  ].forEach(function(file) {
+    document.write("<script type='text/javascript' src='" + file + "?v=" + version + "'><\/script>");
+  });
+  </script>
 </body>
 
 </html>
